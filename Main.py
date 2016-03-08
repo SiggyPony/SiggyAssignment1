@@ -11,6 +11,11 @@ class Controller(cmd.Cmd):
 
     def do_load_data(self, line):
         print('load_data')
+        if (self.data.importData(line)):
+            print('Data loaded')
+        else:
+            print('fail loaded')
+
 
     def do_save_project(self, line):
         print('save_project')
@@ -26,9 +31,13 @@ class Controller(cmd.Cmd):
 
 
 def main():
+    """
     print('Starting')
     controllerTemp = Controller()
     controllerTemp.cmdloop()
-
+    """
+    dataTemp = Data()
+    dataTemp.importData()
+    #dataTemp.printData()
 if __name__ == '__main__':
     main()

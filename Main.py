@@ -11,7 +11,9 @@ class Controller(cmd.Cmd):
 
     def do_load_data(self, line):
         print('load_data')
-        if (self.data.importData(line)):
+        importString = input("File location and name (csv format) >")
+        tableName = input("Table name>")
+        if (self.data.importData(importString, tableName)):
             print('Data loaded')
         else:
             print('fail loaded')
@@ -31,13 +33,13 @@ class Controller(cmd.Cmd):
 
 
 def main():
-    """
+
     print('Starting')
     controllerTemp = Controller()
     controllerTemp.cmdloop()
-    """
-    dataTemp = Data()
-    dataTemp.importData()
+
+    #dataTemp = Data()
+    #dataTemp.importData()
     #dataTemp.printData()
 if __name__ == '__main__':
     main()

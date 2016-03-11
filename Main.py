@@ -11,9 +11,8 @@ class Controller(cmd.Cmd):
 
     def do_load_data(self, line):
         print('load_data')
-        importString = input("File location and name (csv format) >")
         tableName = input("Table name>")
-        if (self.data.importData(importString, tableName)):
+        if self.data.importData(line, tableName):
             print('Data loaded')
         else:
             print('fail loaded')
@@ -21,12 +20,16 @@ class Controller(cmd.Cmd):
 
     def do_save_project(self, line):
         print('save_project')
+        self.data.saveData(line)
+
 
     def do_load_project(self, line):
         print('load_project')
+        self.data.loadData(line)
 
     def do_show(self, line):
         print('show')
+        self.data.printData()
 
     def do_exit(self, line):
         return True

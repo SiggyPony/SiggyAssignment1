@@ -43,6 +43,7 @@ class Data:
             #print(columns)
         self.data[tableName] = columns
         print(self.data)
+        return True
     """
             for row in datareader:
                 print(len(row))
@@ -56,23 +57,9 @@ class Data:
     """
 
 
-
-        #print(columns[0])
-
-        #    for row in spamreader:
-        #        print(', '.join(row))
-
-
-#    with open('file.txt') as f:
-#        reader = csv.reader(f)
-#        reader.next()
-#        for row in reader:
-#        for (i,v) in enumerate(row):
-#            columns[i].append(v)
-#            print(columns[0])
-
-
     def printData(self):
+
+        #TODO find largest value and space each row appropriately
         print('Printing data')
         line = ''
         for tableName, table  in self.data.items():
@@ -99,7 +86,7 @@ class Data:
                 saveString = 'mydata'
             outputFile = open(saveString, 'wb')
             pickle.dump(self.data, outputFile)
-            print('Data set s% saved to %s' % (self.dataSetName, saveString))
+            print('Current project has been saved to %s' % (saveString))
             outputFile.close()
         except Exception as err:
             print(err)

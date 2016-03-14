@@ -44,8 +44,10 @@ class Data:
                 loopCounter += 1
             #print(columns)
         self.data[tableName] = columns
-        print(self.data)
-        return True
+        #print(self.data)
+        self.printData(tableName)
+        print('Data loaded')
+        return self.verifyLineData(tableName)
     """
             for row in datareader:
                 print(len(row))
@@ -59,18 +61,17 @@ class Data:
     """
 
 
-    def printData(self):
+    def printData(self, tableName):
 
         #TODO find largest value and space each row appropriately
         print('Printing data')
         line = ''
-        for tableName, table  in self.data.items():
-            print(tableName)
-            for i in range(0, len(table[0])):
-                for x in range(0, len(table)):
-                    line = line + '   ' + (str(table[x][i]))
-                print(line)
-                line = ''
+        print(tableName)
+        for i in range(0, len(self.data[tableName][0])):
+            for x in range(0, len(self.data[tableName])):
+                line = line + '   ' + (str(self.data[tableName][x][i]))
+            print(line)
+            line = ''
 
 
     def loadData(self, loadString):
@@ -96,30 +97,34 @@ class Data:
                   ' save too relative to the current directory.')
             print('Eg. ./save/myData.dat')
 
-    def verifyLineData(self, tableName):
-        print("Verifying table data.")
+    def verifyLineData(self, tableName='data'):
         tableError = []
-
-        for tableName, table  in self.data.items():
-            print("Verifying table %s" % tableName)
-            # i = row num
-            for i in range(1, len(table[0])):
-                # x = column num.
-                for x in range(0, len(table)):
-                    print('checking value %s from column %s meets re %s' % (x, str(table[x][i]), self.dataGREP[x]))
-                    if re.match(self.dataGREP[x],str(table[x][i])):
-                        print("True")
-                    else:
-                        print("False")
-                        tableError.append([[x], [i]])
-
-
-        #if re.match(self.dataGREP[0], 'AS9'):
-        #    print("True")
-        #else:
-        #    print("False")
-
-        pass
+        errorCount = 0
+        print("Verifying table %s" % tableName)
+        # i = row num
+        for row in range(1, len(self.data[tableName][0])):
+            # x = column num.
+            for col in range(0, len(self.data[tableName])):
+                #print('checking value %s from column %s meets re %s' % (x, str(self.data[tableName][x][i]), self.dataGREP[x]))
+                if re.match(self.dataGREP[col],str(self.data[tableName][col][row])):
+                    pass
+                    #print("True")
+                else:
+                    #print("False")
+                    tableError.append([col, row])
+                    errorCount += 1
+        if errorCount > 0:
+            print("Data error detected in new table")
+            for errorDetails in tableError:
+                print("Error in coloumn %s, row %s where value '%s' does not match expression '%s'" %
+                      (errorDetails[0], errorDetails[1], str(self.data[tableName][errorDetails[1]][errorDetails[0]]),
+                       self.dataGREP[errorDetails[0]]))
+            print("Dropping table. Please fix errors and reload data.")
+            del self.data[tableName]
+            return False
+        else:
+            print("Data verified")
+            return True
 
     def editLineData(self):
         pass

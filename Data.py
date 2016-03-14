@@ -64,7 +64,6 @@ class Data:
     """
 
     def printData(self, tableName):
-
         # TODO find largest value and space each row appropriately
         print('Printing data')
         line = ''
@@ -106,8 +105,10 @@ class Data:
         for row in range(1, len(self.data[tableName][0])):
             # x = column num.
             for col in range(0, len(self.data[tableName])):
-                # print('checking value %s from column %s meets re %s' % (x, str(self.data[tableName][x][i]), self.dataGREP[x]))
-                if re.match(self.dataGREP[col],str(self.data[tableName][col][row])):
+                # print('checking value %s from column %s meets re %s' %
+                # (x, str(self.data[tableName][x][i]), self.dataGREP[x]))
+                if re.match(self.dataGREP[col],
+                            str(self.data[tableName][col][row])):
                     pass
                     # print("True")
                 else:
@@ -117,8 +118,11 @@ class Data:
         if errorCount > 0:
             print("Data error detected in new table")
             for errorDetails in tableError:
-                print("Error in coloumn %s, row %s where value '%s' does not match expression '%s'" %
-                      (errorDetails[0], errorDetails[1], str(self.data[tableName][errorDetails[1]][errorDetails[0]]),
+                print("Error in coloumn %s, row %s where value "
+                      "'%s' does not match expression '%s'" %
+                      (errorDetails[0], errorDetails[1],
+                       str(self.data[tableName][errorDetails[1]]
+                           [errorDetails[0]]),
                        self.dataGREP[errorDetails[0]]))
             print("Dropping table. Please fix errors and reload data.")
             del self.data[tableName]
@@ -129,7 +133,3 @@ class Data:
 
     def editLineData(self):
         pass
-
-
-
-

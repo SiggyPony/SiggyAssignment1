@@ -35,4 +35,3 @@ plt.show()
 class PieChart:
     def __init__(self):
         pass
-    

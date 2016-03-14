@@ -3,6 +3,7 @@ import cmd
 from Data import Data
 from Charts.PieChart import PieChart
 
+
 class Controller(cmd.Cmd):
     def __init__(self):
         cmd.Cmd.__init__(self)
@@ -11,18 +12,21 @@ class Controller(cmd.Cmd):
         self.data = Data()
 
     def do_load_data(self, line):
-        'Load data from the specified file and location: load_data ./data/data4.csv'
+        'Load data from the specified file and location: \
+load_data ./data/data4.csv'
         print('load_data')
         tableName = input("Input table name>")
         self.data.importData(line, tableName)
 
     def do_save_project(self, line):
-        'Save project to the specified file and location: save_project ./data/myproject.dat'
+        'Save project to the specified file and location: \
+save_project ./data/myproject.dat'
         print('save_project')
         self.data.saveData(line)
 
     def do_load_project(self, line):
-        'Load project from the specified file and location: load_project ./data/myproject.dat'
+        'Load project from the specified file and location: \
+load_project ./data/myproject.dat'
         print('load_project')
         self.data.loadData(line)
 
@@ -48,8 +52,8 @@ def main():
     controllerTemp = Controller()
     controllerTemp.cmdloop()
 
-    #dataTemp = Data()
-    #dataTemp.importData()
-    #dataTemp.verifyLineData()
+    # dataTemp = Data()
+    # dataTemp.importData()
+    # dataTemp.verifyLineData()
 if __name__ == '__main__':
     main()

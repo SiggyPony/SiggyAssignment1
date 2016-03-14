@@ -2,6 +2,7 @@ import pickle
 import csv
 import re
 
+
 class Data:
 
     data = {}
@@ -15,36 +16,38 @@ class Data:
     #        ['col2', 51, 22, 23, 24, 25 ],
     #        ['col3', 51, 32, 33, 34, 35 ]
     #    ]}
-
-
-
     #        'table2': {
     #        'col1': [ 51, 12, 13, 14, 15 ],
     #        'col2': [ 51, 22, 23, 24, 25 ],
     #        'col3': [ 51, 32, 33, 34, 35 ]
 
-    dataGREP = ['^[A-Z0-9]{3}$', '^(M|F)$', '^[0-9]{2}$', '^[0-9]{3}$', '^(Normal|Overweight|Obesity|Underweight)$', '^[0-9]{2,3}$']
+    dataGREP = ['^[A-Z0-9]{3}$',
+                '^(M|F)$',
+                '^[0-9]{2}$',
+                '^[0-9]{3}$',
+                '^(Normal|Overweight|Obesity|Underweight)$',
+                '^[0-9]{2,3}$']
 
     def __init__(self):
         pass
 
-    def importData(self, importString = 'data2.csv', tableName = 'data'):
+    def importData(self, importString='data2.csv', tableName='data'):
         with open(importString) as csvfile:
             datareader = csv.reader(csvfile, delimiter=',', quotechar='"')
             columns = []
             loopCounter = 0
             for row in datareader:
-                for (i,v) in enumerate(row):
+                for (i, v) in enumerate(row):
                     if loopCounter == 0:
                         column = [v]
                         columns.append(column)
-                        #print(column)
+                        # print(column)
                     else:
                         columns[i].append(v)
                 loopCounter += 1
-            #print(columns)
+            # print(columns)
         self.data[tableName] = columns
-        #print(self.data)
+        # print(self.data)
         self.printData(tableName)
         print('Data loaded')
         return self.verifyLineData(tableName)
@@ -60,10 +63,9 @@ class Data:
                     #columns[i].append(v)
     """
 
-
     def printData(self, tableName):
 
-        #TODO find largest value and space each row appropriately
+        # TODO find largest value and space each row appropriately
         print('Printing data')
         line = ''
         print(tableName)
@@ -72,7 +74,6 @@ class Data:
                 line = line + '   ' + (str(self.data[tableName][x][i]))
             print(line)
             line = ''
-
 
     def loadData(self, loadString):
         try:
@@ -105,12 +106,12 @@ class Data:
         for row in range(1, len(self.data[tableName][0])):
             # x = column num.
             for col in range(0, len(self.data[tableName])):
-                #print('checking value %s from column %s meets re %s' % (x, str(self.data[tableName][x][i]), self.dataGREP[x]))
+                # print('checking value %s from column %s meets re %s' % (x, str(self.data[tableName][x][i]), self.dataGREP[x]))
                 if re.match(self.dataGREP[col],str(self.data[tableName][col][row])):
                     pass
-                    #print("True")
+                    # print("True")
                 else:
-                    #print("False")
+                    # print("False")
                     tableError.append([col, row])
                     errorCount += 1
         if errorCount > 0:

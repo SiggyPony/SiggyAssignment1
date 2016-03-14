@@ -1,5 +1,6 @@
 import pickle
 import csv
+import re
 
 class Data:
 
@@ -22,11 +23,12 @@ class Data:
     #        'col2': [ 51, 22, 23, 24, 25 ],
     #        'col3': [ 51, 32, 33, 34, 35 ]
 
+    dataGREP = ['^[A-Z0-9]{3}$', '^(M|F)$', '^[0-9]{2}$', '^[0-9]{3}$', '^(Normal|Overweight|Obesity|Underweight)$', '^[0-9]{2,3}$']
 
     def __init__(self):
         pass
 
-    def importData(self, importString = 'data.csv', tableName = 'data'):
+    def importData(self, importString = 'data2.csv', tableName = 'data'):
         with open(importString) as csvfile:
             datareader = csv.reader(csvfile, delimiter=',', quotechar='"')
             columns = []
@@ -94,7 +96,29 @@ class Data:
                   ' save too relative to the current directory.')
             print('Eg. ./save/myData.dat')
 
-    def verifyLineData(self):
+    def verifyLineData(self, tableName):
+        print("Verifying table data.")
+        tableError = []
+
+        for tableName, table  in self.data.items():
+            print("Verifying table %s" % tableName)
+            # i = row num
+            for i in range(1, len(table[0])):
+                # x = column num.
+                for x in range(0, len(table)):
+                    print('checking value %s from column %s meets re %s' % (x, str(table[x][i]), self.dataGREP[x]))
+                    if re.match(self.dataGREP[x],str(table[x][i])):
+                        print("True")
+                    else:
+                        print("False")
+                        tableError.append([[x], [i]])
+
+
+        #if re.match(self.dataGREP[0], 'AS9'):
+        #    print("True")
+        #else:
+        #    print("False")
+
         pass
 
     def editLineData(self):

@@ -22,6 +22,9 @@ class Controller(cmd.Cmd):
         print('save_project')
         self.data.saveData(line)
 
+    def do_verify_table(selfself, line):
+        pass
+
 
     def do_load_project(self, line):
         print('load_project')
@@ -37,12 +40,12 @@ class Controller(cmd.Cmd):
 
 def main():
 
-    print('Starting')
-    controllerTemp = Controller()
-    controllerTemp.cmdloop()
+    #print('Starting')
+    #controllerTemp = Controller()
+    #controllerTemp.cmdloop()
 
-    #dataTemp = Data()
-    #dataTemp.importData()
-    #dataTemp.printData()
+    dataTemp = Data()
+    dataTemp.importData()
+    dataTemp.verifyLineData()
 if __name__ == '__main__':
     main()

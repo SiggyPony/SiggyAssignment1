@@ -13,8 +13,10 @@ class Controller(cmd.Cmd):
         self.data = Data()
 
     def do_load_data(self, importString):
-        'Load data from the specified file and location: \
-load_data ./data/data4.csv'
+        """
+Load data from the specified file and location: load_data ./data/data4.csv
+Will ask for name of new table.
+        """
         l = importString.split()
         if len(l) != 1:
             print("Invalid number of arguments")
@@ -28,8 +30,9 @@ load_data ./data/data4.csv'
         self.data.importData(importString, tableName)
 
     def do_save_project(self, saveString):
-        'Save project to the specified file and location: \
-save_project ./data/myproject.dat'
+        """
+Save project to the specified file and location: save_project myproject.dat
+        """
         l = saveString.split()
         if len(l) != 1:
             print("Invalid number of arguments")
@@ -38,8 +41,9 @@ save_project ./data/myproject.dat'
         self.data.saveProject(saveString)
 
     def do_load_project(self, loadString):
-        'Load project from the specified file and location: \
-load_project ./data/myproject.dat'
+        """
+Load project from the specified file and location: load_project myproject.dat
+        """
         l = loadString.split()
         if len(l) != 1:
             print("Invalid number of arguments")
@@ -49,15 +53,20 @@ load_project ./data/myproject.dat'
 
     def do_show(self, line):
         """
-        Show the current loaded data tables: show
-        Add a name to only show a specific table: show mydata
+Show the current loaded data tables: show
         """
         print('show')
         self.data.printData()
 
     def do_make_piechart(self, line):
         """
-
+Will create Pie Chart.
+Will ask for,
+    Table title (for chart output)
+    Source table (to take data from)
+    Labels column (column in table to use as labels in Pie Chart)
+    Data column (column in table to use as data for Pie Chart)
+        must be numeric
         """
         tableTitle = input("Input title for new table>")
         tableName = input("Input source table name>")

@@ -81,16 +81,17 @@ class Data:
  #           print(line)
  #           line = ''
 
-    def loadData(self, loadString):
+    def loadProject(self, loadString):
         try:
             inputFile = open(loadString, 'rb')
             self.data = pickle.load(inputFile)
             print('Loaded data from ' + loadString)
         except Exception as err:
-            # TODO continue here
+            print(err)
+            print('You need to give the address and name of a valid file to load.')
             pass
 
-    def saveData(self, saveString):
+    def saveProject(self, saveString):
         try:
             if (saveString == ''):
                 saveString = 'mydata'
@@ -140,6 +141,3 @@ class Data:
             print("Data verified")
             return True
 
-
-    def editLineData(self):
-        pass

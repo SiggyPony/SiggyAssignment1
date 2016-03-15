@@ -11,24 +11,24 @@ class Controller(cmd.Cmd):
         self.prompt = '>'
         self.data = Data()
 
-    def do_load_data(self, line):
+    def do_load_data(self, importString):
         'Load data from the specified file and location: \
 load_data ./data/data4.csv'
         print('load_data')
         tableName = input("Input table name>")
-        self.data.importData(line, tableName)
+        self.data.importData(importString, tableName)
 
-    def do_save_project(self, line):
+    def do_save_project(self, saveString):
         'Save project to the specified file and location: \
 save_project ./data/myproject.dat'
         print('save_project')
-        self.data.saveData(line)
+        self.data.saveProject(saveString)
 
-    def do_load_project(self, line):
+    def do_load_project(self, loadString):
         'Load project from the specified file and location: \
 load_project ./data/myproject.dat'
         print('load_project')
-        self.data.loadData(line)
+        self.data.loadProject(loadString)
 
     def do_show(self, line):
         """
@@ -39,8 +39,10 @@ load_project ./data/myproject.dat'
         self.data.printData()
 
     def do_make_piechart(self, line):
-        tableTitle = input("Input title for new table>")
+        """
 
+        """
+        tableTitle = input("Input title for new table>")
         tableName = input("Input source table name>")
         if not(tableName in self.data.data.keys()):
             print("Table not found.")

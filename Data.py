@@ -21,7 +21,7 @@ class Data:
     #        'col2': [ 51, 22, 23, 24, 25 ],
     #        'col3': [ 51, 32, 33, 34, 35 ]
 
-    dataGREP = ['^[A-Z0-9]{3}$',
+    dataGREP = ['^[A-Z][0-9]{3}$',
                 '^(M|F)$',
                 '^[0-9]{2}$',
                 '^[0-9]{3}$',
@@ -31,7 +31,7 @@ class Data:
     def __init__(self):
         pass
 
-    def importData(self, importString='data2.csv', tableName='data'):
+    def importData(self, importString='data3.csv', tableName='data'):
         with open(importString) as csvfile:
             datareader = csv.reader(csvfile, delimiter=',', quotechar='"')
             columns = []
@@ -97,6 +97,9 @@ class Data:
                   ' save too relative to the current directory.')
             print('Eg. ./save/myData.dat')
 
+
+
+
     def verifyLineData(self, tableName='data'):
         tableError = []
         errorCount = 0
@@ -121,8 +124,7 @@ class Data:
                 print("Error in coloumn %s, row %s where value "
                       "'%s' does not match expression '%s'" %
                       (errorDetails[0], errorDetails[1],
-                       str(self.data[tableName][errorDetails[1]]
-                           [errorDetails[0]]),
+                       str(self.data[tableName][errorDetails[0]][errorDetails[1]]),
                        self.dataGREP[errorDetails[0]]))
             print("Dropping table. Please fix errors and reload data.")
             del self.data[tableName]
@@ -130,6 +132,7 @@ class Data:
         else:
             print("Data verified")
             return True
+
 
     def editLineData(self):
         pass

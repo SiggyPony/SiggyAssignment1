@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 """
 Demo of a basic pie chart plus a few additional features.
 
@@ -33,5 +35,16 @@ plt.show()
 """
 
 class PieChart:
-    def __init__(self):
-        pass
+    chartLabels = None
+    chartSizes = None
+
+    def __init__(self, data):
+        self.chartLabels = data[0]
+        self.chartSizes = data[1]
+
+    def drawChart(self):
+        plt.pie(self.chartSizes, None, self.chartLabels)
+        plt.axis('equal')
+        plt.show()
+
+

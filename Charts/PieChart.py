@@ -13,7 +13,8 @@ class PieChart:
 
     def drawChart(self):
         plt.pie(self.chartSizes, None, self.chartLabels, None,
-                autopct='%1.1f%%', shadow=True, startangle=90)
+                autopct='%1.1f%%', pctdistance=0.90,
+                shadow=True, startangle=90)
         plt.figtext(0.5, 0.965, self.chartTitle, ha='center',
                     color='black', weight='bold', size='large')
         plt.axis('equal')

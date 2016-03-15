@@ -39,7 +39,13 @@ load_project ./data/myproject.dat'
         self.data.printData()
 
     def do_make_piechart(self, line):
+        tableTitle = input("Input title for new table>")
+
         tableName = input("Input source table name>")
+        if not(tableName in self.data.data.keys()):
+            print("Table not found.")
+            return
+
         # Show columns
         chartLabelsData = None
         chartSizesData = None
@@ -66,11 +72,14 @@ load_project ./data/myproject.dat'
                         print("False")
                         print("Column must only contain numbers")
                         return
-        chartSizesData = self.data.data[tableName][col][:]
+                chartSizesData = self.data.data[tableName][col][:]
+            else:
+                print("Must give a valid column name.")
+
         del chartSizesData[0]
         print(chartSizesData)
 
-        pieChart = PieChart([chartLabelsData, chartSizesData])
+        pieChart = PieChart([tableTitle, chartLabelsData, chartSizesData])
         pieChart.drawChart()
 
     def do_exit(self, line):

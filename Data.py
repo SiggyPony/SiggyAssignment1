@@ -48,7 +48,7 @@ class Data:
             # print(columns)
         self.data[tableName] = columns
         # print(self.data)
-        self.printData(tableName)
+        self.printData()
         print('Data loaded')
         return self.verifyLineData(tableName)
     """
@@ -63,16 +63,23 @@ class Data:
                     #columns[i].append(v)
     """
 
-    def printData(self, tableName):
+    def printData(self):
         # TODO find largest value and space each row appropriately
-        print('Printing data')
+        print('Printing loaded tables data')
         line = ''
-        print(tableName)
-        for i in range(0, len(self.data[tableName][0])):
-            for x in range(0, len(self.data[tableName])):
-                line = line + '   ' + (str(self.data[tableName][x][i]))
-            print(line)
-            line = ''
+        for tableName, table  in self.data.items():
+            print(tableName)
+            for i in range(0, len(table[0])):
+                for x in range(0, len(table)):
+                    line = line + '   ' + (str(table[x][i]))
+                print(line)
+                line = ''
+ #       print(tableName)
+ #       for i in range(0, len(self.data[tableName][0])):
+ #           for x in range(0, len(self.data[tableName])):
+ #               line = line + '   ' + (str(self.data[tableName][x][i]))
+ #           print(line)
+ #           line = ''
 
     def loadData(self, loadString):
         try:

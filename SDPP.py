@@ -1,8 +1,9 @@
-import cmd
 import pickle
 import csv
-import re
 import matplotlib.pyplot as plt
+import cmd
+import re
+import argparse
 
 
 class Data:
@@ -78,8 +79,8 @@ class Data:
             print('Loaded data from ' + loadString)
         except Exception as err:
             print(err)
-            print('You need to give the address and \
-             name of a valid file to load.')
+            print('You need to give the address and' +
+                  'name of a valid file to load.')
             pass
 
     def saveProject(self, saveString):
@@ -143,7 +144,8 @@ class PieChart:
 
     def drawChart(self):
         plt.pie(self.chartSizes, None, self.chartLabels, None,
-                autopct='%1.1f%%', shadow=True, startangle=90)
+                autopct='%1.1f%%', pctdistance=0.90,
+                shadow=True, startangle=90)
         plt.figtext(0.5, 0.965, self.chartTitle, ha='center',
                     color='black', weight='bold', size='large')
         plt.axis('equal')
@@ -263,9 +265,22 @@ Will ask for,
 
 
 def main():
-    print('Starting')
-    controllerTemp = Controller()
-    controllerTemp.cmdloop()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-n', '--new', help='Start a new project',
+                        action='store_true')
+    parser.add_argument('-l', '--load', help='Load a saved project' +
+                                             ' from LOAD')
+    args = parser.parse_args()
+    if args.new:
+        cmd_temp = Controller()
+        cmd_temp.cmdloop()
+        return
+    if args.load is not None:
+        cmd_temp = Controller()
+        cmd_temp.do_load_project(args.load)
+        cmd_temp.cmdloop()
+        return
+    parser.print_help()
 
 
 if __name__ == '__main__':

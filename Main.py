@@ -1,5 +1,6 @@
 import cmd
 import re
+import argparse
 
 from Data import Data
 from Charts.PieChart import PieChart
@@ -118,10 +119,24 @@ Will ask for,
 
 
 def main():
-    print('Starting')
-    controllerTemp = Controller()
-    controllerTemp.cmdloop()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-n', '--new', help='Start a new project',
+                        action='store_true')
+    parser.add_argument('-l', '--load', help='Load a saved project' +
+                                             ' from LOAD')
+    args = parser.parse_args()
+    if args.new:
+        cmd_temp = Controller()
+        cmd_temp.cmdloop()
+        return
+    if args.load is not None:
+        cmd_temp = Controller()
+        cmd_temp.do_load_project(args.load)
+        cmd_temp.cmdloop()
+        return
+    parser.print_help()
 
 
 if __name__ == '__main__':
     main()
+

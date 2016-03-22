@@ -76,8 +76,8 @@ class Data:
             print('Loaded data from ' + loadString)
         except Exception as err:
             print(err)
-            print('You need to give the address and \
-             name of a valid file to load.')
+            print('You need to give the address and' +
+             'name of a valid file to load.')
             pass
 
     def saveProject(self, saveString):
